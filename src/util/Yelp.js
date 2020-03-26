@@ -1,17 +1,16 @@
 import SearchBar from "../components/SearchBar/SearchBar";
-
-const apiKey = 'qKJjjaCTyGfU0fZN5U6ltOJ6_wrgxRazEHUMP_XgpZx8UeV-QkNst2NGKPd_dptLocNFJEVg8y_3pAXGWJqk6DlPiCisc47TNoBMrp2dX1J9GWNbSBJalEbRXndzXnYx';
-    
+import apiKeys from "./apiKeys";   
 
     //object that stores the functionality needed to interact with the Yelp API
 const Yelp = {
     searchYelp(term, location, sortBy) {
         return fetch(
+            //request to the CORS Anywhere API for gaining proper CORS permissions needed for the request to the Yelp API to work
             `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, 
-            {
+            {   //format for authorization specified by CORS Anywhere API
                 headers: {
-                    Authorization: `Bearer ${apiKey}`
-                },
+                    Authorization: `Bearer ${apiKeys.yelpKey}`
+                }
             })
             .then(response => {
                 return response.json(); //convert response object to JSON object
